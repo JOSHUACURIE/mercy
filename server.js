@@ -23,7 +23,11 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet()); // Security headers
-app.use(cors());   // Enable CORS
+app.use(cors({
+  origin: ["http://localhost:5173", "https://leracare.vercel.app/"], // update with your real frontend URL
+  credentials: true
+}));
+
 app.use(express.json({ limit: '10mb' })); // Parse JSON
 app.use(express.urlencoded({ extended: true })); // Parse form data
 app.use(morgan('dev')); // HTTP request logger
