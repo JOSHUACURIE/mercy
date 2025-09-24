@@ -24,9 +24,13 @@ app.use((req, res, next) => {
 
 app.use(helmet()); // Security headers
 app.use(cors({
-  origin: ["http://localhost:5173", "https://leracare.vercel.app/"], // update with your real frontend URL
+  origin: ["http://localhost:5173", "https://leracare.vercel.app"], // no trailing slash
   credentials: true
 }));
+
+// Handle preflight requests
+app.options("*", cors());
+
 
 app.use(express.json({ limit: '10mb' })); // Parse JSON
 app.use(express.urlencoded({ extended: true })); // Parse form data
